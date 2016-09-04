@@ -9,4 +9,4 @@ RUN mkdir /var/www/ipilulka_cz
 WORKDIR /var/www/ipilulka_cz
 
 # for vim modeline: (do not edit)
-# vim: set ts=4 sw=4 et
+# vim: set ts=4 sw=4 et:

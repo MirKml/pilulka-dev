@@ -7,9 +7,9 @@ RUN a2ensite pma.ipilulka.loc
 
 # setup phpMyAdmin
 RUN curl -sS https://files.phpmyadmin.net/phpMyAdmin/4.6.4/phpMyAdmin-4.6.4-english.tar.gz \
-			| tar xvz -C /var/www \
-	&& mv /var/www/phpMyAdmin-4.6.4-english /var/www/phpMyAdmin
+        | tar xvz -C /var/www \
+    && mv /var/www/phpMyAdmin-4.6.4-english /var/www/phpMyAdmin
 ADD config.inc.php /var/www/phpMyAdmin/config.inc.php
 
 # for vim modeline: (do not edit)
-# vim: set ts=4 sw=4 et
+# vim: set ts=4 sw=4 et:
