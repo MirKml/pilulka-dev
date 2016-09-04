@@ -1,3 +1,3 @@
 #!/bin/bash
 projectDir=$(dirname "$0")
-docker exec $($projectDir/sqlcontainerID.sh) mysqldump -u root -plocaldb "$@"
+$projectDir/manage.sh exec db mysqldump -u root -plocaldb "$@"
