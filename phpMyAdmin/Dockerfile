@@ -2,8 +2,8 @@ FROM pilulka:php5.6-apache
 
 MAINTAINER miroslav kubelik <koubel@seznam.cz>
 
-ADD site.apache.conf /etc/apache2/sites-available/pma.ipilulka.loc.conf
-RUN a2ensite pma.ipilulka.loc
+ADD site.apache.conf /etc/apache2/sites-available/pma.pilulka.loc.conf
+RUN a2ensite pma.pilulka.loc
 
 # setup phpMyAdmin
 RUN curl -sS https://files.phpmyadmin.net/phpMyAdmin/4.6.4/phpMyAdmin-4.6.4-english.tar.gz \
