@@ -53,7 +53,7 @@ buildImage() {
         echo "Usage $SCRIPT_NAME buildImage IMAGE_NAME|all"
         echo "Available Docker images: ${images[@]}"
         echo "If \"all\" is used as IMAGE_NAME, all images are built."
-        retun 0
+        return 0
     fi
 
     local i
