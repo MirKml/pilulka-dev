@@ -1,13 +1,13 @@
 # add into your HOST (linux destop) /etc/hosts these entries:
-# 127.0.0.2 pma.pilulka.loc
-# 127.0.0.3 www.ipilulka.loc
+# 127.0.0.2 dbm.pilulka.dkl
+# 127.0.0.3 www.ipilulka.dkl
 # then you can access these from the HOST (linux desktop) web browser
 phpMyAdmin:
   image: pilulka:phpMyAdmin
   ports:
     - "127.0.0.2:80:80"
   extra_hosts:
-    - "pma.pilulka.loc:127.0.0.1"
+    - "dmp.pilulka.dkl:127.0.0.1"
   links:
     - db
 
@@ -16,7 +16,7 @@ ipilulka.cz:
   ports:
     - "127.0.0.3:80:80"
   extra_hosts:
-    - "www.ipilulka.loc:127.0.0.1"
+    - "www.ipilulka.dkl:127.0.0.1"
   volumes:
     - ../ipilulka_cz:/var/www/ipilulka_cz
   links:
@@ -33,8 +33,6 @@ db:
 
 redis:
   image: redis:3.0
-  ports:
-    - "6379"
 
 edi:
   image: pilulka:edi

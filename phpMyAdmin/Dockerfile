@@ -2,14 +2,20 @@ FROM pilulka:php5.6-apache
 
 MAINTAINER miroslav kubelik <koubel@seznam.cz>
 
-ADD site.apache.conf /etc/apache2/sites-available/pma.pilulka.loc.conf
-RUN a2ensite pma.pilulka.loc
+ADD site.apache.conf /etc/apache2/sites-available/dbm.pilulka.dkl.conf
+RUN a2ensite dbm.pilulka.dkl
+RUN a2dissite 000-default
 
 # setup phpMyAdmin
 RUN curl -sS https://files.phpmyadmin.net/phpMyAdmin/4.6.4/phpMyAdmin-4.6.4-english.tar.gz \
-        | tar xvz -C /var/www \
-    && mv /var/www/phpMyAdmin-4.6.4-english /var/www/phpMyAdmin
-ADD config.inc.php /var/www/phpMyAdmin/config.inc.php
+        | tar xz -C /var/www \
+    && mv /var/www/phpMyAdmin-4.6.4-english /var/www/pma
+ADD config.inc.php /var/www/pma/config.inc.php
+
+# setup adminer
+RUN mkdir /var/www/adminer
+RUN curl https://www.adminer.org/static/download/4.2.5/adminer-4.2.5-mysql.php \
+    > /var/www/adminer/adminer.php
 
 # for vim modeline: (do not edit)
 # vim: set ts=4 sw=4 et:
