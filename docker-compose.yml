@@ -33,6 +33,8 @@ db:
 
 redis:
   image: redis:3.0
+  ports:
+    - "6379"
 
 edi:
   image: pilulka:edi
