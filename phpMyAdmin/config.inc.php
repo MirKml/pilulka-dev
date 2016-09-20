@@ -7,7 +7,6 @@ $cfg['blowfish_secret'] = 'test8294o4o404'; /* YOU MUST FILL IN THIS FOR COOKIE 
 
 $cfg['QueryHistoryDB'] = true;
 $cfg['QueryHistoryMax'] = 30;
-$cfg['ShowPhpInfo'] = true;
 $cfg['LeftRecentTable'] = 5;
 $cfg['ShowSQL'] = true;
 

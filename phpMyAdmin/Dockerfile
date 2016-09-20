@@ -11,6 +11,7 @@ RUN curl -sS https://files.phpmyadmin.net/phpMyAdmin/4.6.4/phpMyAdmin-4.6.4-engl
         | tar xz -C /var/www \
     && mv /var/www/phpMyAdmin-4.6.4-english /var/www/pma
 ADD config.inc.php /var/www/pma/config.inc.php
+ADD info.php /var/www/info.php
 
 # setup adminer
 RUN mkdir /var/www/adminer
