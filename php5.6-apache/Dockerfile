@@ -16,7 +16,8 @@ RUN apt-get install -y \
     libxml2-dev \
     libedit-dev \
     libicu-dev \
-    libssl-dev
+    libssl-dev \
+    freetds-dev
 
 RUN docker-php-ext-install -j$(nproc) mcrypt \
     && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
@@ -30,7 +31,9 @@ RUN docker-php-ext-install -j$(nproc) mcrypt \
     && docker-php-ext-install -j$(nproc) zip \
     && docker-php-ext-install -j$(nproc) calendar \
     && docker-php-ext-install -j$(nproc) xmlrpc \
-    && docker-php-ext-install -j$(nproc) sysvsem
+    && docker-php-ext-install -j$(nproc) sysvsem \
+    && docker-php-ext-configure pdo_dblib --with-libdir=/lib/x86_64-linux-gnu \
+    && docker-php-ext-install -j$(nproc) pdo_dblib
 
 RUN apt-get -y install libzmq-dev \
     && pecl install zmq-1.1.3 \
