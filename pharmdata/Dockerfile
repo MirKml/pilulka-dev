@@ -21,6 +21,7 @@ RUN apt-get -y install unrar-free \
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
+COPY php.ini /usr/local/etc/php
 WORKDIR /usr/src/pharmdata
 
 # for vim modeline: (do not edit)
