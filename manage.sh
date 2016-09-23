@@ -57,12 +57,12 @@ buildImage() {
         return 0
     fi
 
-		if [ "$1" == "all" ]; then
-			for buildCommand in "${buildOptions[@]}"; do
-				docker build $buildCommand
-			done
-			return 0
-		fi
+        if [ "$1" == "all" ]; then
+            for buildCommand in "${buildOptions[@]}"; do
+                docker build $buildCommand
+            done
+            return 0
+        fi
 
     local i
     for ((i=0; i<${#images[@]}; i++)); do
@@ -74,16 +74,16 @@ buildImage() {
 
     echo "Cannot build docker image \"$1\", image is unknown."
     echo "Available Docker images: ${images[@]}"
-	return 1
+    return 1
 }
 
 execCommand() {
     local containerID=$(getContainerID $1)
     if [[ "$containerID" == ----* ]]; then
-		# no runnig container found, so we try to run command
-		# via new container 
-		callCompose run --rm "$@"
-		return $?
+        # no runnig container found, so we try to run command
+        # via new container 
+        callCompose run --rm "$@"
+        return $?
     fi
     shift
     docker exec $containerID "$@"
@@ -91,39 +91,39 @@ execCommand() {
 
 # remove all stopped containers
 removeStopped() {
-	local containerIDs=()
-	local containerNames=()
-	while IFS= read -r line; do
-		if [[ "$line" == *Exited* ]]; then
-			# separator for columns in output from docker ps -a are spaces
-			# so we can use strin as array
-			local columns=(${line});
-			containerIDs+=(${columns[0]})
-			containerNames+=(${columns[1]})
-		fi
+    local containerIDs=()
+    local containerNames=()
+    while IFS= read -r line; do
+        if [[ "$line" == *Exited* ]]; then
+            # separator for columns in output from docker ps -a are spaces
+            # so we can use strin as array
+            local columns=(${line});
+            containerIDs+=(${columns[0]})
+            containerNames+=(${columns[1]})
+        fi
     done < <(docker ps -a --format "{{.ID}} {{.Names}} {{.Status}}")
 
-	if [ ${#containerIDs[@]} -eq 0 ]; then
-		echo "no stopped containers found"
-		return 0
-	fi
+    if [ ${#containerIDs[@]} -eq 0 ]; then
+        echo "no stopped containers found"
+        return 0
+    fi
 
-	echo "removing these stopped containers: ${containerNames[@]}"
-	docker rm ${containerIDs[@]}
+    echo "removing these stopped containers: ${containerNames[@]}"
+    docker rm ${containerIDs[@]}
 }
 
 # get contaner ID by it's name from defined by docker-compose
 getContainerID() {
-	echo $(callCompose ps $1 | tail -n1 | cut -d' ' -f1)
+    echo $(callCompose ps $1 | tail -n1 | cut -d' ' -f1)
 }
 
 # exec interarractive bash session with particular container
 attachContainer() {
     local containerID=$(getContainerID $1)
     if [[ "$containerID" == ----* ]]; then
-		echo "container $1 doesn't run, cannot attach into it"
-		echo "start the container first (docker run or docker-compose up)"
-		return 1
+        echo "container $1 doesn't run, cannot attach into it"
+        echo "start the container first (docker run or docker-compose up)"
+        return 1
     fi
     docker exec -it $containerID /bin/bash
 }
@@ -170,7 +170,7 @@ case "$1" in
         if [ -z "$2" ]; then
            echo "go: no container name supplied"
            echo "usage: $SCRIPT_NAME go CONTAINER"
-		   list
+           list
            exit 1
         fi
         attachContainer $2
