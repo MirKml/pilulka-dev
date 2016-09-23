@@ -40,3 +40,8 @@ edi:
   image: pilulka:edi
   volumes:
     - ../edi:/usr/src/edi
+
+pharmdata:
+  image: pilulka:pharmdata
+  volumes:
+    - ../pharmdata:/usr/src/pharmdata

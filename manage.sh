@@ -5,7 +5,7 @@
 
 MAIN_DIR=$(dirname "$0")
 PROJECT=pilulka
-CONTAINERS=( phpMyAdmin ipilulka.cz edi db )
+CONTAINERS=( phpMyAdmin ipilulka.cz edi db pharmdata )
 SCRIPT_NAME=${0##*/}
 
 usage() {
@@ -40,12 +40,13 @@ list() {
 }
 
 buildImage() {
-    local images=( apache-php phpMyAdmin ipilulka.cz edi)
+    local images=( apache-php phpMyAdmin ipilulka.cz edi pharmdata )
     local buildOptions=(
         "-t pilulka:php5.6-apache $MAIN_DIR/php5.6-apache"
         "-t pilulka:phpMyAdmin $MAIN_DIR/phpMyAdmin"
         "-t pilulka:ipilulka.cz $MAIN_DIR/ipilulka.cz"
         "-t pilulka:edi $MAIN_DIR/edi"
+        "-t pilulka:pharmdata $MAIN_DIR/pharmdata"
     )
 
     if [ "$#" -eq 0 ]; then
@@ -55,6 +56,13 @@ buildImage() {
         echo "If \"all\" is used as IMAGE_NAME, all images are built."
         return 0
     fi
+
+		if [ "$1" == "all" ]; then
+			for buildCommand in "${buildOptions[@]}"; do
+				docker build $buildCommand
+			done
+			return 0
+		fi
 
     local i
     for ((i=0; i<${#images[@]}; i++)); do
