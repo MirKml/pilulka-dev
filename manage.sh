@@ -57,12 +57,12 @@ buildImage() {
         return 0
     fi
 
-        if [ "$1" == "all" ]; then
-            for buildCommand in "${buildOptions[@]}"; do
-                docker build $buildCommand
-            done
-            return 0
-        fi
+    if [ "$1" == "all" ]; then
+        for buildCommand in "${buildOptions[@]}"; do
+            docker build $buildCommand
+        done
+        return 0
+    fi
 
     local i
     for ((i=0; i<${#images[@]}; i++)); do
