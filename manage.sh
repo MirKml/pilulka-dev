@@ -82,7 +82,7 @@ execCommand() {
     if [[ "$containerID" == ----* ]]; then
         # no runnig container found, so we try to run command
         # via new container 
-        callCompose run --rm "$@"
+        callCompose run -T --rm "$@"
         return $?
     fi
     shift
