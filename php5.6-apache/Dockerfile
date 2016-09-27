@@ -51,6 +51,8 @@ RUN apt-get -y install libzmq-dev \
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
+COPY php.ini /usr/local/etc/php
+
 # clean for keep up small image
 RUN docker-php-source delete \
     && apt-get -y autoclean \
