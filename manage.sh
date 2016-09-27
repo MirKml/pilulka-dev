@@ -5,7 +5,7 @@
 
 MAIN_DIR=$(dirname "$0")
 PROJECT=pilulka
-CONTAINERS=( phpMyAdmin ipilulka.cz edi db pharmdata )
+CONTAINERS=( dbm ipilulka.cz edi db pharmdata )
 SCRIPT_NAME=${0##*/}
 
 usage() {
@@ -20,7 +20,7 @@ Options:
   --help       Display this help and exit.
 
 Available command:
-
+ 
   list         List of available containers.
   buildImage   Rebuild necessary images, see "buildImage" for
                more informations about possible Docker images.     
@@ -40,10 +40,10 @@ list() {
 }
 
 buildImage() {
-    local images=( apache-php phpMyAdmin ipilulka.cz edi pharmdata )
+    local images=( apache-php dbm ipilulka.cz edi pharmdata )
     local buildOptions=(
         "-t pilulka:php5.6-apache $MAIN_DIR/php5.6-apache"
-        "-t pilulka:phpMyAdmin $MAIN_DIR/phpMyAdmin"
+        "-t pilulka:dbm $MAIN_DIR/dbm"
         "-t pilulka:ipilulka.cz $MAIN_DIR/ipilulka.cz"
         "-t pilulka:edi $MAIN_DIR/edi"
         "-t pilulka:pharmdata $MAIN_DIR/pharmdata"

@@ -2,12 +2,10 @@
 # 127.0.0.2 dbm.pilulka.dkl
 # 127.0.0.3 www.ipilulka.dkl
 # then you can access these from the HOST (linux desktop) web browser
-phpMyAdmin:
-  image: pilulka:phpMyAdmin
+dbm:
+  image: pilulka:dbm
   ports:
     - "127.0.0.2:80:80"
-  extra_hosts:
-    - "dmp.pilulka.dkl:127.0.0.1"
   links:
     - db
 

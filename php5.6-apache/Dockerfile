@@ -1,4 +1,4 @@
-# base image for pilulka.cz web based projects
+# base image for most pilulka.cz web based projects
 FROM php:5.6-apache
 
 MAINTAINER miroslav kubelik <koubel@seznam.cz>
@@ -50,8 +50,6 @@ RUN apt-get -y install libzmq-dev \
 # setup Composer
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
-
-COPY php.ini /usr/local/etc/php
 
 # clean for keep up small image
 RUN docker-php-source delete \

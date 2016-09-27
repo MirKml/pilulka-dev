@@ -1,6 +1,19 @@
-FROM pilulka:php5.6-apache
+FROM php:5.6-apache
 
 MAINTAINER miroslav kubelik <koubel@seznam.cz>
+
+RUN apt-get -y update
+
+RUN apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev
+
+RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
+        --with-png-dir=/usr/include --with-freetype-dir=/usr/include/ \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install zip
 
 ADD site.apache.conf /etc/apache2/sites-available/dbm.pilulka.dkl.conf
 RUN a2ensite dbm.pilulka.dkl
