@@ -13,6 +13,7 @@ RUN docker-php-ext-install -j$(nproc) zip
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
+COPY php.ini /usr/local/etc/php
 RUN mkdir /usr/src/edi
 WORKDIR /usr/src/edi
 
