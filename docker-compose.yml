@@ -1,6 +1,7 @@
 # add into your HOST (linux destop) /etc/hosts these entries:
 # 127.0.0.2 dbm.pilulka.dkl
 # 127.0.0.3 www.ipilulka.dkl
+# 127.0.0.4 www.ipilulkask.dkl
 # then you can access these from the HOST (linux desktop) web browser
 dbm:
   image: pilulka:dbm
@@ -17,6 +18,18 @@ ipilulka.cz:
     - "www.ipilulka.dkl:127.0.0.1"
   volumes:
     - ../ipilulka_cz:/var/www/ipilulka_cz
+  links:
+    - db
+    - redis
+
+ipilulka.sk:
+  image: pilulka:ipilulka.sk
+  ports:
+    - "127.0.0.4:80:80"
+  extra_hosts:
+    - "www.ipilulkask.dkl:127.0.0.1"
+  volumes:
+    - ../ipilulka_sk:/var/www/ipilulka_sk
   links:
     - db
     - redis

@@ -5,7 +5,7 @@
 
 MAIN_DIR=$(dirname "$0")
 PROJECT=pilulka
-CONTAINERS=( dbm ipilulka.cz edi db pharmdata )
+CONTAINERS=( dbm ipilulka.cz edi db pharmdata ipilulka.sk )
 SCRIPT_NAME=${0##*/}
 
 usage() {
@@ -40,13 +40,14 @@ list() {
 }
 
 buildImage() {
-    local images=( apache-php dbm ipilulka.cz edi pharmdata )
+    local images=( apache-php dbm ipilulka.cz edi pharmdata ipilulka.sk )
     local buildOptions=(
         "-t pilulka:php5.6-apache $MAIN_DIR/php5.6-apache"
         "-t pilulka:dbm $MAIN_DIR/dbm"
         "-t pilulka:ipilulka.cz $MAIN_DIR/ipilulka.cz"
         "-t pilulka:edi $MAIN_DIR/edi"
         "-t pilulka:pharmdata $MAIN_DIR/pharmdata"
+        "-t pilulka:ipilulka.sk $MAIN_DIR/ipilulka.sk"
     )
 
     if [ "$#" -eq 0 ]; then
